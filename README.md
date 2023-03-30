@@ -66,4 +66,5 @@
   ```
   
   ## The Result
-  ![Assignment_2](https://github.com/Erlangga28/Assignment-Framework-AppsWithJSON/blob/main/ImagesResult/Result.mp4)
+  [![Watch the video](https://github.com/Erlangga28/Assignment-Framework-AppsWithJSON/blob/main/ImagesResult/Result1.png)](https://github.com/Erlangga28/Assignment-Framework-AppsWithJSON/blob/main/ImagesResult/Result.mp4)
+  
