@@ -1,4 +1,6 @@
-﻿using MonkeyFinder.Services;
+﻿using IntelliJ.Lang.Annotations;
+using MonkeyFinder.Services;
+using static Android.Icu.Text.CaseMap;
 
 namespace MonkeyFinder.ViewModel;
 
@@ -10,22 +12,10 @@ public partial class MonkeysViewModel : BaseViewModel
     IGeolocation geolocation;
     public MonkeysViewModel(MonkeyService monkeyService, IConnectivity connectivity, IGeolocation geolocation)
     {
-        Title = "Monkey Finder";
+        Title = "Premier League Teams";
         this.monkeyService = monkeyService;
         this.connectivity = connectivity;
         this.geolocation = geolocation;
-    }
-    
-    [RelayCommand]
-    async Task GoToDetails(Monkey monkey)
-    {
-        if (monkey == null)
-        return;
-
-        await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
-        {
-            {"Monkey", monkey }
-        });
     }
 
     [ObservableProperty]
@@ -49,16 +39,16 @@ public partial class MonkeysViewModel : BaseViewModel
             IsBusy = true;
             var monkeys = await monkeyService.GetMonkeys();
 
-            if(Monkeys.Count != 0)
+            if (Monkeys.Count != 0)
                 Monkeys.Clear();
 
-            foreach(var monkey in monkeys)
+            foreach (var monkey in monkeys)
                 Monkeys.Add(monkey);
 
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Unable to get monkeys: {ex.Message}");
+            Debug.WriteLine($"Unable to get the teams: {ex.Message}");
             await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
         }
         finally
@@ -67,6 +57,18 @@ public partial class MonkeysViewModel : BaseViewModel
             IsRefreshing = false;
         }
 
+    }
+
+    [RelayCommand]
+    async Task GoToDetails(Monkey monkey)
+    {
+        if (monkey == null)
+            return;
+
+        await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
+        {
+            {"EPL", monkey }
+        });
     }
 
     [RelayCommand]
@@ -93,8 +95,6 @@ public partial class MonkeysViewModel : BaseViewModel
                 new Location(m.Latitude, m.Longitude), DistanceUnits.Miles))
                 .FirstOrDefault();
 
-            await Shell.Current.DisplayAlert("", first.Name + " " +
-                first.Location, "OK");
 
         }
         catch (Exception ex)

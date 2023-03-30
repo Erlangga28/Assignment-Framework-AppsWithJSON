@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="MonkeyFinder.View.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,56 +7,55 @@
     xmlns:viewmodel="clr-namespace:MonkeyFinder.ViewModel"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     ios:Page.UseSafeArea="True"
-    Title="Monkeys"
+    Title="Premier League Teams"
     x:DataType="viewmodel:MonkeysViewModel">
     <Grid
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
-        RowSpacing="0"
-        BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+        RowSpacing="0">
         <RefreshView
             Grid.ColumnSpan="2"
             Command="{Binding GetMonkeysCommand}"
             IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
                 <CollectionView
-                        ItemsSource="{Binding Monkeys}"
-                        SelectionMode="None">
-                    <CollectionView.EmptyView>
+                    ItemsSource="{Binding Monkeys}"
+                    SelectionMode="None">
+                    <!--<CollectionView.EmptyView>
                         <StackLayout Padding="100">
                             <Image
-                                    HorizontalOptions="Center"
-                                    HeightRequest="160"
-                                    WidthRequest="160"
-                                    Source="nodata.png"
-                                    VerticalOptions="Center" />
+                                HorizontalOptions="Center"
+                                Source="nodata.png"
+                                HeightRequest="160"
+                                WidthRequest="160"
+                                VerticalOptions="Center" />
                         </StackLayout>
                     </CollectionView.EmptyView>
-                    <!--<CollectionView.ItemsLayout>
-                            <GridItemsLayout  Orientation="Horizontal" Span="3"/>
-                        </CollectionView.ItemsLayout>-->
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout  Orientation="Horizontal" Span="3"/>
+                    </CollectionView.ItemsLayout>-->
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Monkey">
-                            <Grid Padding="10" HorizontalOptions="Fill">
+                            <Grid Padding="10">
                                 <Frame HeightRequest="125" Style="{StaticResource CardView}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MonkeysViewModel}}, Path=GoToDetailsCommand}"
-                                                CommandParameter="{Binding .}"/>
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MonkeysViewModel}}, Path=GoToDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <Grid Padding="0" ColumnDefinitions="125,*">
                                         <Image
-                                                Aspect="AspectFill"
-                                                HeightRequest="125"
-                                                Source="{Binding Image}"
-                                                WidthRequest="125" />
+                                            Aspect="AspectFill"
+                                            HeightRequest="125"
+                                            Source="{Binding Image}"
+                                            WidthRequest="125" />
                                         <VerticalStackLayout
-                                                VerticalOptions="Center"
-                                                Grid.Column="1"
-                                                Padding="10">
+                                            Grid.Column="1"
+                                            VerticalOptions="Center"
+                                            Padding="10">
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Location}" />
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Stadium}" />
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
@@ -74,7 +73,7 @@
             Command="{Binding GetMonkeysCommand}"
             IsEnabled="{Binding IsNotBusy}"
             Style="{StaticResource ButtonOutline}"
-            Text="Get Monkeys" />
+            Text="Show Teams" />
 
         <!--  Add this  -->
         <Button

@@ -1,4 +1,6 @@
-﻿namespace MonkeyFinder.ViewModel;
+﻿using IntelliJ.Lang.Annotations;
+
+namespace MonkeyFinder.ViewModel;
 
 public partial class BaseViewModel : ObservableObject
 {
