@@ -17,17 +17,17 @@ public class MonkeyService
             return monkeyList;
 
         //Online
-        /*var response = await httpClient.GetAsync("https://github.com/Erlangga28/Assignment-Framework-AppsWithJSON/blob/main/EplTeams/Resources/Raw/epldata.json");
+        var response = await httpClient.GetAsync("https://raw.githubusercontent.com/Erlangga28/Assignment-Framework-AppsWithJSON/main/EplTeams/MonkeyFinder/Resources/Raw/EplData.json");
         if (response.IsSuccessStatusCode)
         {
             monkeyList = await response.Content.ReadFromJsonAsync<List<Monkey>>();
-        }*/
+        }
 
         // Offline
-        using var stream = await FileSystem.OpenAppPackageFileAsync("EplData.json");
+        /*using var stream = await FileSystem.OpenAppPackageFileAsync("EplData.json");
         using var reader = new StreamReader(stream);
         var contents = await reader.ReadToEndAsync();
-        monkeyList = JsonSerializer.Deserialize<List<Monkey>>(contents);
+        monkeyList = JsonSerializer.Deserialize<List<Monkey>>(contents); */
 
         return monkeyList;
     }
